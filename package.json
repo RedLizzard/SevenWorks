@@ -1,0 +1,14 @@
+{
+  "name": "first_diary",
+  "version": "1.0.0",
+  "description": "First attempt using nodejs to make a diary",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.16.3"
+  }
+}
