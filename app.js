@@ -63,13 +63,25 @@ app.get('/entries/add', (req, res)=>{
     res.render('entries/add');
 });
 
+// Edit entry 
+app.get('/entries/edit/:id', (req, res)=>{
+    Entry.findOne({
+        _id: req.params.id
+    })
+    .then(entry=>{
+        res.render('entries/edit', {
+            entry: entry
+        });
+    });
+});
+
 // Process Form
 app.post('/entries', (req, res)=>{
     let errors = [];
-    if(!req.body.Title){
+    if(!req.body.title){
         errors.push({text: 'Please add a title'});
     }
-    if(!req.body.Details){
+    if(!req.body.details){
         errors.push({text: 'Please add some details'});
     }
     if(errors.length > 0) {
@@ -81,13 +93,14 @@ app.post('/entries', (req, res)=>{
     }
     else{
         const newUser = {
-            title: req.body.Title,
-            details: req.body.Details
+            title: req.body.title,
+            details: req.body.details
         };
         new Entry(newUser)
             .save()
-            .then(entries => {
+            .then(entry => {
                 res.redirect('/entries');
+                
             })
     }
     

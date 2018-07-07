@@ -4,15 +4,15 @@
 {{/each}}
 
 <div class="card card-body">
-    <h3>Entry</h3>
+    <h3>Edit Entry</h3>
     <form action="/entries" method="post">
         <div class="form-group">
             <label for="title">Title</label>
-            <input type="text" class="form-control" name="title">
+            <input type="text" class="form-control" name="title" value="{{entry.title}}" required>
         </div>
         <div class="form-group">
             <label for="details">Details</label>
-            <textarea class="form-control" name="details" placeholder="Be honest with the universe"></textarea>
+            <textarea class="form-control" name="details" placeholder="Be honest with the universe" required>{{entry.details}}</textarea>
         </div>
         <button type="submit" class="btn btn-danger">Submit</button>
     </form>
