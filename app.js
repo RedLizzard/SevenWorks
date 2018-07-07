@@ -2,6 +2,7 @@ const express = require('express');
 const exphbs = require('express-handlebars');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
+const methodOverride = require('method-override');
 
 const app = express();
 
@@ -33,6 +34,9 @@ app.set('view engine', 'handlebars');
 // Body-parser middleware
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
+
+// Method override middleware
+app.use(methodOverride('_method'));
 
 // Index Route
 app.get('/', (req, res)=>{
@@ -104,6 +108,23 @@ app.post('/entries', (req, res)=>{
             })
     }
     
+});
+
+//Edit Form Process
+app.put('/entries/:id', (req, res)=>{
+    Entry.findOne({
+        _id: req.params.id
+    })
+    .then(entry=>{
+        // new values
+        entry.title = req.body.title,
+        entry.details = req.body.details
+
+        entry.save()
+            .then(entry=>{
+            res.redirect('/entries');
+        })
+    })
 });
 
 // Log localhost port if connection is made successfully

@@ -5,7 +5,8 @@
 
 <div class="card card-body">
     <h3>Edit Entry</h3>
-    <form action="/entries" method="post">
+    <form action="/entries/{{entry.id}}?_method=PUT" method="post">
+    <input type="hidden" name="_method" value="PUT">
         <div class="form-group">
             <label for="title">Title</label>
             <input type="text" class="form-control" name="title" value="{{entry.title}}" required>
