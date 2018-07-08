@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const mongoose = require('mongoose');
 
+
 // Load Entry Model
 require('../models/Entry');
 const Entry = mongoose.model('entries');
@@ -11,7 +12,7 @@ router.get('/', (req, res) => {
     Entry.find({})
         .sort({ date: 'desc' })
         .then(entries => {
-            res.render('/index', {
+            res.render('entries/index', {
                 entries: entries,
             });
         });
@@ -19,7 +20,7 @@ router.get('/', (req, res) => {
 
 // Add entry 
 router.get('/add', (req, res) => {
-    res.render('/add');
+    res.render('entries/add');
 });
 
 // Edit entry 
